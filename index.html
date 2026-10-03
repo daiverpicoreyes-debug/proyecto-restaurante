@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Sabor del Chef - Restaurante Gourmet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #be0c0f;
+            --secondary: #D4AF37;
+            --text: #2c2c2c;
+            --light: #f5f5f5;
+            --accent: #FF6B35;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f0f5d 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        
+        
+         .hero {
+        background: linear-gradient(135deg, #8b1313 0%, #8b1313 100%),
+                   
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="dots" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="3" fill="%23D4AF37" opacity="0.3"/></pattern></defs><rect width="1200" height="600" fill="%238B4513"/><rect width="1200" height="600" fill="url(%23dots)"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--secondary);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid var(--secondary);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--secondary);
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(3, 74, 31, 0.3);
+        }
+
+        
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        
+        .audio-section {
+            background: var(--light);
+        }
+
+        .audio-container {
+            text-align: center;
+            margin: 2rem 0;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .audio-container h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        audio {
+            width: 100%;
+            max-width: 500px;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+    
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--secondary);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .menu-item-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .menu-item-image-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+
+        .menu-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        
+        .gallery {
+            background: var(--light);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 250px;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1) rotate(1deg);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(139, 69, 19, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        
+        .video-section {
+            background: var(--light);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 2rem auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        
+        .contact-section {
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info div {
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-icon {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            min-width: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Georgia', serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        
+        footer {
+            background: linear-gradient(135deg, var(--primary) 0%, #3f0f5d 100%);
+            color: rgba(234, 238, 241, 0.901);
+            padding: 3rem 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            font-size: 0.9rem;
+        }
+
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="header-container">
+            <div class="logo">🍽️ El Sabor del Chef</div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#menu">Menú</a></li>
+                    <li><a href="#galeria">Galería</a></li>
+                    <li><a href="#video">Experiencia</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    
+    <section class="hero" id="inicio">
+        <div>
+            <h1>Bienvenido a El Sabor del Chef</h1>
+            <p>Donde la tradición se encuentra con la innovación culinaria</p>
+            <a href="#menu" class="btn">Explora Nuestro Menú</a>
+        </div>
+    </section>
+
+    
+    <section class="audio-section">
+        <h2>Un Mensaje Especial para Ti</h2>
+        <div class="audio-container">
+            <h3>🎙️ Bienvenida del Chef</h3>
+            <p>Escucha nuestro mensaje de bienvenida personalizado:</p>
+            <p style="color: #666; font-size: 0.9rem; margin-top: 1rem;">Haz click en el botón abajo para escuchar nuestro saludo.</p>
+        </div>
+    </section>
+
+
+    <section id="menu">
+        <h2>Nuestro Menú Delicioso</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="assets/images/carne.webp" alt="Carne a la Parrilla Premium" class="menu-item-image-img">
+                <div class="menu-item-content">
+                    <h3>Carne a la Parrilla Premium</h3>
+                    <p>Filete de res importado, sazonado con especias gourmet y acompañado de verduras frescas del mercado.</p>
+                    <div class="price">$28.99</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img src="assets/images/pescado.jpg" alt="Salmón Fresco del Atlántico" class="menu-item-image-img">
+                <div class="menu-item-content">
+                    <h3>Salmón Fresco del Atlántico</h3>
+                    <p>Salmón de agua fría con costra de hierbas, crema de limón y papas al romero.</p>
+                    <div class="price">$32.50</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img src="assets/images/pasta.webp" alt="Pasta Fresca Casera" class="menu-item-image-img">
+                <div class="menu-item-content">
+                    <h3>Pasta Fresca Casera</h3>
+                    <p>Ravioles rellenos de queso ricotta, salsa de champiñones silvestres y trufa negra.</p>
+                    <div class="price">$24.99</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img src="assets/images/marisco.jpg" alt="Langosta Thermidor" class="menu-item-image-img">
+                <div class="menu-item-content">
+                    <h3>Langosta Thermidor</h3>
+                    <p>Langosta rellena de carne de langosta, champiñones y salsa de brandy, gratinada.</p>
+                    <div class="price">$45.00</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img src="assets/images/ensalada.jpg" alt="Ensalada Gourmet" class="menu-item-image-img">
+                <div class="menu-item-content">
+                    <h3>Ensalada Gourmet</h3>
+                    <p>Mezcla de hojas verdes, queso azul, nueces, manzana y aderezo balsámico de la casa.</p>
+                    <div class="price">$15.50</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img src="assets/images/postre.jpg" alt="Postre Signature" class="menu-item-image-img">
+                <div class="menu-item-content">
+                    <h3>Postre Signature</h3>
+                    <p>Tiramisú artesanal con café expreso italiano y mascarpone belga, finalizado con cacao.</p>
+                    <div class="price">$12.99</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="gallery" id="galeria">
+        <h2>Galería de Nuestras Creaciones</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="assets/images/carne.webp" alt="Carnes Selectas">
+            </div>
+
+            <div class="gallery-item">
+                <img src="assets/images/pescado.jpg" alt="Pescados Frescos">
+            </div>
+
+            <div class="gallery-item">
+                <img src="assets/images/pasta.webp" alt="Pastas Italianas">
+            </div>
+
+            <div class="gallery-item">
+                <img src="assets/images/marisco.jpg" alt="Mariscos Premium">
+            </div>
+
+            <div class="gallery-item">
+                <img src="assets/images/ensalada.jpg" alt="Ensaladas Frescas">
+            </div>
+
+            <div class="gallery-item">
+                <img src="assets/images/postre.jpg" alt="Postres Exquisitos">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN VIDEO -->
+    <section class="video-section" id="video">
+        <h2>Nuestra Experiencia Culinaria</h2>
+        <p style="text-align: center; margin-bottom: 2rem;">Mira cómo preparamos nuestros platos especiales</p>
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/GTFgrcyid5Q" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        
+    </section>
+
+    
+    <section class="contact-section" id="contacto">
+        <h2>Contáctanos</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div>
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h3>Ubicación</h3>
+                        <p>Cr 2 # 45-749<br>sector industrial, Monteria córdoba<br>Colómbia</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <h3>Teléfono</h3>
+                        <p>+57 300 767 5439<br>+57 301 254 2475</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <h3>Email</h3>
+                        <p>daiverpicoreyes@gmail.com<br>reservas@elsabordelchef.com</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="contact-icon">🕐</div>
+                    <div>
+                        <h3>Horarios</h3>
+                        <p>Lunes - Jueves: 11am - 10pm<br>Viernes - Sábado: 11am - 11pm<br>Domingo: 12pm - 9pm</p>
+                    </div>
+                </div>
+            </div>
+
+            <form>
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="asunto">Asunto</label>
+                    <input type="text" id="asunto" name="asunto" required>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <h3>El Sabor del Chef</h3>
+            <p>Experiencia culinaria de clase mundial desde 2025</p>
+            
+            <div class="footer-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#menu">Menú</a>
+                <a href="#galeria">Galería</a>
+                <a href="#contacto">Contacto</a>
+                <a href="#">Política de Privacidad</a>
+                <a href="#">Términos y Condiciones</a>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 El Sabor del Chef. Pagína Con Fines Educativos.</p>
+                <p>Síguenos en: <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Twitter</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! Nos contactaremos pronto.');
+            document.querySelector('form').reset();
+        });
+
+        
+        function reproducirBienvenida() {
+            const texto = `
+            ¡Bienvenido a El Sabor del Chef!
+            
+            Nos complace recibirte en nuestro restaurante de comida gourmet.
+            
+            Aquí combinamos la tradición con la innovación culinaria.
+            Cada plato es preparado con ingredientes frescos y de la más alta calidad.
+            
+            Te invitamos a disfrutar de una experiencia gastronómica inolvidable.
+            
+            ¡Que disfrutes tu comida!
+            `;
+
+            const synth = window.speechSynthesis;
+            const utterance = new SpeechSynthesisUtterance(texto);
+
+            utterance.lang = 'es-ES';
+            utterance.rate = 1;
+            utterance.pitch = 1;
+            utterance.volume = 1;
+
+            synth.speak(utterance);
+        }
+
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioContainer = document.querySelector('.audio-container');
+            if (audioContainer) {
+                const boton = document.createElement('button');
+                boton.className = 'btn';
+                boton.textContent = '🔊 Escuchar Bienvenida';
+                boton.style.marginTop = '1rem';
+                boton.onclick = reproducirBienvenida;
+                audioContainer.appendChild(boton);
+            }
+        });
+    </script>
+</body>
+</html>
